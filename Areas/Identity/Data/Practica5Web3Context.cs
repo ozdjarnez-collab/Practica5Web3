@@ -1,21 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Practica5Web3.Models;
 
-namespace Practica5Web3.Data;
-
-public class Practica5Web3Context : IdentityDbContext<IdentityUser>
+namespace Practica5Web3.Areas.Identity.Data
 {
-    public Practica5Web3Context(DbContextOptions<Practica5Web3Context> options)
-        : base(options)
+    public class Practica5Web3Context : IdentityDbContext
     {
-    }
+        public Practica5Web3Context(DbContextOptions<Practica5Web3Context> options)
+            : base(options)
+        {
+        }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+        public DbSet<Categoria> Categoria { get; set; }
+        public DbSet<Estante> Estante { get; set; }
+        public DbSet<Medicamento> Medicamento { get; set; }
     }
 }

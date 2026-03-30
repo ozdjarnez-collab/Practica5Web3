@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Practica5Web3.Data;
+using Practica5Web3.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

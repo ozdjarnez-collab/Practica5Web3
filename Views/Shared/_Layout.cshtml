@@ -44,6 +44,24 @@
                                     <a class="nav-link text-white" asp-controller="Farmaceutico" asp-action="Index">Panel Farmacéutico</a>
                                 </li>
                             }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Farmaceutico"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Categorias" asp-action="Index">Categorías</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Farmaceutico"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Estantes" asp-action="Index">Estantes</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Farmaceutico"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Medicamentoes" asp-action="Index">Medicamentos</a>
+                                </li>
+                            }
                         }
                     </ul>
 
