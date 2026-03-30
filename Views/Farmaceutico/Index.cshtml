@@ -2,7 +2,58 @@
     ViewData["Title"] = "Panel de Farmacéutico";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Panel de Farmacéutico</h1>
-    <p>Aquí pueden entrar el Administrador y el Farmacéutico.</p>
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h1 class="page-title display-5">Panel de Farmacéutico</h1>
+        <p class="section-subtitle">Consulta rápida y control operativo del inventario</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card panel-card h-100">
+                <div class="card-body text-center">
+                    <div class="icon-box bg-primary text-white mx-auto">📂</div>
+                    <h4>Categorías</h4>
+                    <p class="text-muted">Consulta las categorías disponibles en el sistema.</p>
+                    <a asp-controller="Categorias" asp-action="Index" class="btn btn-primary w-100">Ver Categorías</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card panel-card h-100">
+                <div class="card-body text-center">
+                    <div class="icon-box bg-success text-white mx-auto">🗂️</div>
+                    <h4>Estantes</h4>
+                    <p class="text-muted">Consulta la ubicación de medicamentos por estante.</p>
+                    <a asp-controller="Estantes" asp-action="Index" class="btn btn-success w-100">Ver Estantes</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card panel-card h-100">
+                <div class="card-body text-center">
+                    <div class="icon-box bg-dark text-white mx-auto">💊</div>
+                    <h4>Medicamentos</h4>
+                    <p class="text-muted">Revisa el listado de medicamentos del inventario.</p>
+                    <a asp-controller="Medicamentoes" asp-action="Index" class="btn btn-dark w-100">Ver Medicamentos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card panel-card">
+                <div class="card-body">
+                    <h4 class="mb-3">Resumen de acceso del Farmacéutico</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">✅ Puede visualizar categorías</li>
+                        <li class="list-group-item">✅ Puede visualizar estantes</li>
+                        <li class="list-group-item">✅ Puede visualizar medicamentos</li>
+                        <li class="list-group-item">❌ No puede crear, editar ni eliminar registros administrativos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
