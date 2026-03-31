@@ -8,8 +8,9 @@ namespace Practica5Web3.Models
         public int TotalCategorias { get; set; }
         public int TotalEstantes { get; set; }
 
-        public List<Medicamento> StockBajo { get; set; } = new List<Medicamento>();
-        public List<Medicamento> PorVencer { get; set; } = new List<Medicamento>();
-        public List<Medicamento> Vencidos { get; set; } = new List<Medicamento>();
+        public List<Medicamento> StockBajo { get; set; } = new();
+        public List<Medicamento> PorVencer { get; set; } = new();
+        public List<Medicamento> Vencidos { get; set; } = new();
+        public List<Medicamento> Disponibles { get; set; } = new();
     }
 }

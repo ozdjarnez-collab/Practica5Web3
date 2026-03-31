@@ -10,7 +10,7 @@ using Practica5Web3.Models;
 
 namespace Practica5Web3.Controllers
 {
-    [Authorize(Roles = "Administrador,Farmaceutico")]
+    [Authorize(Roles = "Administrador,Farmaceutico,Cliente")]
     public class HomeController : Controller
     {
         private readonly Practica5Web3Context _context;
@@ -50,6 +50,13 @@ namespace Practica5Web3.Controllers
                     .Include(m => m.Estante)
                     .Where(m => m.FechaVencimiento < hoy)
                     .OrderBy(m => m.FechaVencimiento)
+                    .ToListAsync(),
+
+                Disponibles = await _context.Medicamento
+                    .Include(m => m.Categoria)
+                    .Include(m => m.Estante)
+                    .Where(m => m.Estado == true && m.Stock > 0)
+                    .OrderBy(m => m.Nombre)
                     .ToListAsync()
             };
 
