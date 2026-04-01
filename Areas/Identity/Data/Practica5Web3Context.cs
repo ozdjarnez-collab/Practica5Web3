@@ -21,6 +21,7 @@ namespace Practica5Web3.Areas.Identity.Data
         public DbSet<Perfil> Perfil { get; set; }
         public DbSet<Practica5Web3.Models.Cliente> Cliente { get; set; } = default!;
         public DbSet<Practica5Web3.Models.Pedido> Pedido { get; set; } = default!;
+        public DbSet<Practica5Web3.Models.PedidoMedicamento> PedidoMedicamento { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

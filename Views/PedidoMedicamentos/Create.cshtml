@@ -1,0 +1,51 @@
+﻿@model Practica5Web3.Models.PedidoMedicamento
+
+@{
+    ViewData["Title"] = "Agregar al Pedido";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Agregar Medicamento al Pedido</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label fw-bold">ID del Pedido</label>
+                            <select asp-for="PedidoId" class="form-control" asp-items="ViewBag.PedidoId"></select>
+                            <span asp-validation-for="PedidoId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label fw-bold">Seleccionar Medicamento</label>
+                            <select asp-for="MedicamentoId" class="form-control" asp-items="ViewBag.MedicamentoId"></select>
+                            <span asp-validation-for="MedicamentoId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Cantidad" class="control-label fw-bold"></label>
+                            <input asp-for="Cantidad" class="form-control" type="number" min="1" value="1" />
+                            <span asp-validation-for="Cantidad" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group d-grid gap-2">
+                            <input type="submit" value="Confirmar y Agregar" class="btn btn-success" />
+                            <a asp-controller="Pedidos" asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

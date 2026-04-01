@@ -7,28 +7,66 @@
 <div class="container mt-4">
     <h1>Detalles del Pedido</h1>
 
-    <div class="card shadow">
+    <div class="card shadow mb-4">
         <div class="card-header bg-info text-white">
             <h4 class="mb-0">Pedido #@Model.Id</h4>
         </div>
         <div class="card-body">
             <dl class="row">
-                <dt class="col-sm-3">Fecha de Registro</dt>
+                <dt class="col-sm-3 font-weight-bold">Fecha de Registro</dt>
                 <dd class="col-sm-9">@Model.FechaPedido.ToString("f")</dd>
 
-                <dt class="col-sm-3">Monto Total</dt>
+                <dt class="col-sm-3 font-weight-bold">Monto Total</dt>
                 <dd class="col-sm-9 text-success fw-bold">@Model.Total.ToString("C")</dd>
 
-                <dt class="col-sm-3">Cliente</dt>
+                <dt class="col-sm-3 font-weight-bold">Cliente</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.Cliente.Nombre)</dd>
 
-                <dt class="col-sm-3">Email Cliente</dt>
+                <dt class="col-sm-3 font-weight-bold">Email Cliente</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.Cliente.Email)</dd>
             </dl>
         </div>
-        <div class="card-footer">
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar</a>
+        <div class="card-footer d-flex gap-2">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar Pedido</a>
             <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Medicamentos en este Pedido</h5>
+
+            <a asp-controller="PedidoMedicamentos" asp-action="Create" asp-route-pedidoId="@Model.Id" class="btn btn-success btn-sm">
+                + Agregar Medicamento
+            </a>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.PedidoMedicamentos != null && Model.PedidoMedicamentos.Any())
+            {
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Medicamento</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.PedidoMedicamentos)
+                        {
+                            <tr>
+                                <td>@item.Medicamento.Nombre</td>
+                                <td>@item.Cantidad unidades</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info m-3">
+                    No hay medicamentos registrados en este pedido aún.
+                </div>
+            }
         </div>
     </div>
 </div>

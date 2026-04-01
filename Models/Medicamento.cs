@@ -36,5 +36,6 @@ namespace Practica5Web3.Models
 
         [ForeignKey("EstanteId")]
         public Estante? Estante { get; set; }
+        public virtual ICollection<PedidoMedicamento>? PedidoMedicamentos { get; set; }
     }
 }

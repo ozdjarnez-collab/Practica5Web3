@@ -15,5 +15,6 @@ namespace Practica5Web3.Models
         // Relación con Cliente
         public int ClienteId { get; set; }
         public virtual Cliente? Cliente { get; set; }
+        public virtual ICollection<PedidoMedicamento>? PedidoMedicamentos { get; set; }
     }
 }
