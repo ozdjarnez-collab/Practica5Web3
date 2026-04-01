@@ -1,0 +1,66 @@
+﻿@model Practica5Web3.Models.Usuario
+
+@{
+    ViewData["Title"] = "Crear Usuario y Perfil";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Nuevo Registro de Usuario</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Datos de Cuenta</h5>
+                        <hr />
+                        <div class="form-group mb-3">
+                            <label asp-for="Nombre" class="control-label font-weight-bold"></label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre completo" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="control-label font-weight-bold"></label>
+                            <input asp-for="Email" class="form-control" placeholder="correo@ejemplo.com" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5>Detalles del Perfil</h5>
+                        <hr />
+                        <div class="form-group mb-3">
+                            <label asp-for="Perfil.Direccion" class="control-label font-weight-bold"></label>
+                            <input asp-for="Perfil.Direccion" class="form-control" />
+                            <span asp-validation-for="Perfil.Direccion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Perfil.Telefono" class="control-label font-weight-bold"></label>
+                            <input asp-for="Perfil.Telefono" class="form-control" />
+                            <span asp-validation-for="Perfil.Telefono" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Perfil.FechaNacimiento" class="control-label font-weight-bold"></label>
+                            <input asp-for="Perfil.FechaNacimiento" type="date" class="form-control" />
+                            <span asp-validation-for="Perfil.FechaNacimiento" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-success px-4">Guardar Todo</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
