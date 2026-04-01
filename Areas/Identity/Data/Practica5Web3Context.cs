@@ -19,6 +19,8 @@ namespace Practica5Web3.Areas.Identity.Data
         // NUEVAS tablas para la Parte 2
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Perfil> Perfil { get; set; }
+        public DbSet<Practica5Web3.Models.Cliente> Cliente { get; set; } = default!;
+        public DbSet<Practica5Web3.Models.Pedido> Pedido { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

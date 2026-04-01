@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Practica5Web3.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using Practica5Web3.Areas.Identity.Data;
 namespace Practica5Web3.Migrations
 {
     [DbContext(typeof(Practica5Web3Context))]
-    partial class Practica5Web3ContextModelSnapshot : ModelSnapshot
+    [Migration("20260401171338_RelacionClientePedido")]
+    partial class RelacionClientePedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
