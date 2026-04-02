@@ -5,68 +5,84 @@
 }
 
 <div class="container mt-4">
-    <h1>Detalles del Pedido</h1>
+    <a asp-action="Index" class="back-link">Volver a Pedidos</a>
 
-    <div class="card shadow mb-4">
-        <div class="card-header bg-info text-white">
-            <h4 class="mb-0">Pedido #@Model.Id</h4>
+    <div class="card details-card">
+        <div class="details-header">
+            <h1>Detalles del Pedido #@Model.Id</h1>
         </div>
-        <div class="card-body">
-            <dl class="row">
-                <dt class="col-sm-3 font-weight-bold">Fecha de Registro</dt>
-                <dd class="col-sm-9">@Model.FechaPedido.ToString("f")</dd>
 
-                <dt class="col-sm-3 font-weight-bold">Monto Total</dt>
-                <dd class="col-sm-9 text-success fw-bold">@Model.Total.ToString("C")</dd>
+        <div class="details-body">
+            <div class="details-section">
+                <h3>Información del Pedido</h3>
+                
+                <div class="details-row">
+                    <div class="details-label">Fecha de Registro</div>
+                    <div class="details-value">@Model.FechaPedido.ToString("dd/MM/yyyy HH:mm")</div>
+                </div>
 
-                <dt class="col-sm-3 font-weight-bold">Cliente</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.Cliente.Nombre)</dd>
+                <div class="details-row">
+                    <div class="details-label">Monto Total</div>
+                    <div class="details-value">
+                        <span class="badge bg-success" style="font-size: 1rem;">@Model.Total.ToString("C")</span>
+                    </div>
+                </div>
+            </div>
 
-                <dt class="col-sm-3 font-weight-bold">Email Cliente</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.Cliente.Email)</dd>
-            </dl>
-        </div>
-        <div class="card-footer d-flex gap-2">
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar Pedido</a>
-            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-        </div>
-    </div>
+            <div class="details-section">
+                <h3>Información del Cliente</h3>
+                
+                <div class="details-row">
+                    <div class="details-label">Nombre</div>
+                    <div class="details-value fw-semibold">@Html.DisplayFor(model => model.Cliente.Nombre)</div>
+                </div>
 
-    <div class="card shadow">
-        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Medicamentos en este Pedido</h5>
+                <div class="details-row">
+                    <div class="details-label">Email</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Cliente.Email)</div>
+                </div>
+            </div>
 
-            <a asp-controller="PedidoMedicamentos" asp-action="Create" asp-route-pedidoId="@Model.Id" class="btn btn-success btn-sm">
-                + Agregar Medicamento
-            </a>
-        </div>
-        <div class="card-body p-0">
             @if (Model.PedidoMedicamentos != null && Model.PedidoMedicamentos.Any())
             {
-                <table class="table table-hover table-striped mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Medicamento</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.PedidoMedicamentos)
-                        {
-                            <tr>
-                                <td>@item.Medicamento.Nombre</td>
-                                <td>@item.Cantidad unidades</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <div class="alert alert-info m-3">
-                    No hay medicamentos registrados en este pedido aún.
+                <div class="details-section">
+                    <h3>Medicamentos en este Pedido</h3>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Medicamento</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PedidoMedicamentos)
+                                {
+                                    <tr>
+                                        <td class="fw-semibold">@item.Medicamento.Nombre</td>
+                                        <td>
+                                            <span class="badge bg-primary">@item.Cantidad unidades</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             }
+
+            <div class="details-actions">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil-square"></i> Editar
+                </a>
+                <a asp-controller="PedidoMedicamentos" asp-action="Create" asp-route-pedidoId="@Model.Id" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Agregar Medicamento
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-list"></i> Volver al Listado
+                </a>
+            </div>
         </div>
     </div>
 </div>

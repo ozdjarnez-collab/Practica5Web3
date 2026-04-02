@@ -1,45 +1,50 @@
 ﻿@model Practica5Web3.Models.PedidoMedicamento
 
 @{
-    ViewData["Title"] = "Agregar al Pedido";
+    ViewData["Title"] = "Agregar Medicamento al Pedido";
 }
 
 <div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header bg-success text-white">
-                    <h4 class="mb-0">Agregar Medicamento al Pedido</h4>
+    <a asp-controller="Pedidos" asp-action="Index" class="back-link">Volver a Pedidos</a>
+
+    <div class="card form-card">
+        <div class="card-header">
+            <h1>Agregar Medicamento al Pedido</h1>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="validation-errors"></div>
+
+                <div class="form-group">
+                    <label class="form-label">ID del Pedido</label>
+                    <select asp-for="PedidoId" class="form-select" asp-items="ViewBag.PedidoId"></select>
+                    <span asp-validation-for="PedidoId" class="text-danger"></span>
                 </div>
-                <div class="card-body">
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="form-group mb-3">
-                            <label class="control-label fw-bold">ID del Pedido</label>
-                            <select asp-for="PedidoId" class="form-control" asp-items="ViewBag.PedidoId"></select>
-                            <span asp-validation-for="PedidoId" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label class="control-label fw-bold">Seleccionar Medicamento</label>
-                            <select asp-for="MedicamentoId" class="form-control" asp-items="ViewBag.MedicamentoId"></select>
-                            <span asp-validation-for="MedicamentoId" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Cantidad" class="control-label fw-bold"></label>
-                            <input asp-for="Cantidad" class="form-control" type="number" min="1" value="1" />
-                            <span asp-validation-for="Cantidad" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group d-grid gap-2">
-                            <input type="submit" value="Confirmar y Agregar" class="btn btn-success" />
-                            <a asp-controller="Pedidos" asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <label class="form-label">Seleccionar Medicamento</label>
+                    <select asp-for="MedicamentoId" class="form-select" asp-items="ViewBag.MedicamentoId">
+                        <option value="">-- Seleccione un Medicamento --</option>
+                    </select>
+                    <span asp-validation-for="MedicamentoId" class="text-danger"></span>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label asp-for="Cantidad" class="form-label"></label>
+                    <input asp-for="Cantidad" class="form-control" type="number" min="1" value="1" />
+                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Confirmar y Agregar
+                    </button>
+                    <a asp-controller="Pedidos" asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

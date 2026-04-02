@@ -1,36 +1,43 @@
 ﻿@model Practica5Web3.Models.Estante
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de Estante";
 }
 
-<h1>Details</h1>
+<div class="container mt-4">
+    <a asp-action="Index" class="back-link">Volver a Estantes</a>
 
-<div>
-    <h4>Estante</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ubicacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ubicacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="card details-card">
+        <div class="details-header">
+            <h1>Detalles de Estante</h1>
+        </div>
+
+        <div class="details-body">
+            <div class="details-section">
+                <div class="details-row">
+                    <div class="details-label">Nombre</div>
+                    <div class="details-value fw-semibold">@Html.DisplayFor(model => model.Nombre)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Ubicación</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Ubicacion)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Descripción</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Descripcion)</div>
+                </div>
+            </div>
+
+            <div class="details-actions">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil-square"></i> Editar
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-list"></i> Volver al Listado
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,33 +1,44 @@
 ﻿@model Practica5Web3.Models.Pedido
 
 @{
-    ViewData["Title"] = "Crear Pedido";
+    ViewData["Title"] = "Nuevo Pedido";
 }
 
-<h1>Registrar Nuevo Pedido</h1>
+<div class="container mt-4">
+    <a asp-action="Index" class="back-link">Volver a Pedidos</a>
 
-<h4>Pedido</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card form-card">
+        <div class="card-header">
+            <h1>Nuevo Pedido</h1>
+        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="ClienteId" class="control-label font-weight-bold">Seleccionar Cliente</label>
-                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId">
-                    <option value="">-- Seleccione un Cliente --</option>
-                </select>
-                <span asp-validation-for="ClienteId" class="text-danger"></span>
-            </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="validation-errors"></div>
 
-            <p class="text-muted small">* El total y la fecha se generarán automáticamente al guardar.</p>
+                <div class="form-group">
+                    <label asp-for="ClienteId" class="form-label">Seleccionar Cliente</label>
+                    <select asp-for="ClienteId" class="form-select" asp-items="ViewBag.ClienteId">
+                        <option value="">-- Seleccione un Cliente --</option>
+                    </select>
+                    <span asp-validation-for="ClienteId" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mt-3">
-                <input type="submit" value="Crear Pedido" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
-            </div>
-        </form>
+                <div class="alert alert-info mt-3">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Nota:</strong> El total y la fecha se generarán automáticamente al guardar el pedido.
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Crear Pedido
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

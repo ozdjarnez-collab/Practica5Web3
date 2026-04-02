@@ -11,13 +11,36 @@
             <p class="text-muted mb-0">Inventario general de medicamentos</p>
         </div>
 
-        @if (User.IsInRole("Administrador"))
+        @if (User.IsInRole("Administrador") || User.IsInRole("Farmaceutico"))
         {
             <a asp-action="Create" class="btn btn-dark">
                 + Nuevo medicamento
             </a>
         }
     </div>
+
+    <!-- Buscador -->
+    <div class="card panel-card mb-4">
+        <div class="card-body">
+            <form method="get" asp-action="Index" class="d-flex gap-2">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por nombre, categoría o descripción..." value="@ViewBag.SearchTerm" />
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> Buscar
+                </button>
+                @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                {
+                    <a asp-action="Index" class="btn btn-outline-secondary">Limpiar</a>
+                }
+            </form>
+        </div>
+    </div>
+
+    @if (ViewBag.SearchTerm != null && !string.IsNullOrEmpty(ViewBag.SearchTerm))
+    {
+        <div class="alert alert-info mb-3">
+            Resultados de búsqueda para: <strong>@ViewBag.SearchTerm</strong>
+        </div>
+    }
 
     <div class="card panel-card">
         <div class="card-body p-0">
@@ -80,6 +103,17 @@
                     </tbody>
                 </table>
             </div>
+
+            @if (!Model.Any())
+            {
+                <div class="p-4 text-center text-muted">
+                    <p class="mb-0">No hay medicamentos disponibles</p>
+                    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                    {
+                        <p class="small">Intenta con otros términos de búsqueda</p>
+                    }
+                </div>
+            }
         </div>
     </div>
 </div>

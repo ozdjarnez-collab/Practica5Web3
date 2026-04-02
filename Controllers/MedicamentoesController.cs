@@ -21,13 +21,23 @@ namespace Practica5Web3.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            var practica5Web3Context = _context.Medicamento
+            var query = _context.Medicamento
                 .Include(m => m.Categoria)
-                .Include(m => m.Estante);
+                .Include(m => m.Estante)
+                .AsQueryable();
 
-            return View(await practica5Web3Context.ToListAsync());
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                query = query.Where(m => m.Nombre.ToLower().Contains(search) ||
+                                        m.Categoria.Nombre.ToLower().Contains(search) ||
+                                        m.Descripcion.ToLower().Contains(search));
+            }
+
+            ViewBag.SearchTerm = search;
+            return View(await query.OrderBy(m => m.Nombre).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -50,7 +60,6 @@ namespace Practica5Web3.Controllers
             return View(medicamento);
         }
 
-        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nombre");
@@ -58,7 +67,6 @@ namespace Practica5Web3.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Precio,Stock,FechaVencimiento,CategoriaId,EstanteId,Descripcion,Estado")] Medicamento medicamento)

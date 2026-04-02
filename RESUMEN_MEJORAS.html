@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Mejoras - Practica5Web3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .container-main {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .header-title {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .badge-gradient {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .table-custom {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table-custom thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main mt-5">
+        <h1 class="header-title display-4 mb-5">
+            <i class="bi bi-capsule me-3"></i>Resumen de Mejoras - Practica5Web3
+        </h1>
+
+        <!-- Mejoras Principales -->
+        <section class="mb-5">
+            <h2 class="mb-4 fw-bold">
+                <i class="bi bi-sparkles text-warning me-2"></i>3 Mejoras Principales
+            </h2>
+
+            <div class="row">
+                <!-- Mejora 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card bg-light">
+                        <div class="feature-icon text-primary">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h5 class="fw-bold">?? Buscadores Mejorados</h5>
+                        <p class="mb-0">Busca medicamentos y clientes de forma rápida y eficiente.</p>
+                        <small class="text-muted d-block mt-2">? Búsqueda en tiempo real<br>? Filtrado por múltiples campos</small>
+                    </div>
+                </div>
+
+                <!-- Mejora 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card bg-light">
+                        <div class="feature-icon text-success">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+                        <h5 class="fw-bold">????? Farmacéuticos Registran Medicamentos</h5>
+                        <p class="mb-0">Los farmacéuticos pueden crear nuevos medicamentos fácilmente.</p>
+                        <small class="text-muted d-block mt-2">? Nuevo botón "Crear"<br>? Formulario completo</small>
+                    </div>
+                </div>
+
+                <!-- Mejora 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card bg-light">
+                        <div class="feature-icon text-danger">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h5 class="fw-bold">?? Estética Moderna y Dashboard</h5>
+                        <p class="mb-0">Diseño elegante con gradientes, animaciones y dashboard funcional.</p>
+                        <small class="text-muted d-block mt-2">? Efectos visuales<br>? 6 métricas principales</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- Características Nuevas -->
+        <section class="mb-5">
+            <h2 class="mb-4 fw-bold">
+                <i class="bi bi-star text-success me-2"></i>Características Nuevas
+            </h2>
+
+            <div class="table-responsive">
+                <table class="table table-custom">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-check-circle me-2"></i>Característica</th>
+                            <th>Descripción</th>
+                            <th>Ubicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Buscador Medicamentos</strong></td>
+                            <td>Busca por nombre, categoría o descripción</td>
+                            <td><code>/Medicamentoes</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buscador Clientes</strong></td>
+                            <td>Busca por nombre o email</td>
+                            <td><code>/Clientes</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Farmacéutico Create</strong></td>
+                            <td>Farmacéuticos pueden crear medicamentos</td>
+                            <td><code>/Medicamentoes/Create</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dashboard Mejorado</strong></td>
+                            <td>6-7 métricas con datos en tiempo real</td>
+                            <td><code>/Home/Index</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Navbar con Iconos</strong></td>
+                            <td>Navegación más intuitiva y visual</td>
+                            <td>En toda la app</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Animaciones</strong></td>
+                            <td>Transiciones suaves y efectos visuales</td>
+                            <td>En toda la app</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- Estilos Visuales -->
+        <section class="mb-5">
+            <h2 class="mb-4 fw-bold">
+                <i class="bi bi-paint-bucket text-info me-2"></i>Mejoras Visuales
+            </h2>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="feature-card">
+                        <h5 class="fw-bold mb-3">?? Paleta de Colores</h5>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="badge" style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 10px 15px;">Primario</span>
+                            <span class="badge bg-success" style="padding: 10px 15px;">Success</span>
+                            <span class="badge bg-danger" style="padding: 10px 15px;">Danger</span>
+                            <span class="badge bg-warning" style="padding: 10px 15px;">Warning</span>
+                            <span class="badge bg-info" style="padding: 10px 15px;">Info</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="feature-card">
+                        <h5 class="fw-bold mb-3">? Efectos</h5>
+                        <ul class="list-unstyled">
+                            <li>? Hover elevado en tarjetas</li>
+                            <li>? Botones con ripple effect</li>
+                            <li>? Iconos flotantes animados</li>
+                            <li>? Sombras dinámicas</li>
+                            <li>? Transiciones suaves</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- Archivos Modificados -->
+        <section class="mb-5">
+            <h2 class="mb-4 fw-bold">
+                <i class="bi bi-file-earmark-code text-secondary me-2"></i>Archivos Modificados
+            </h2>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="feature-card bg-light">
+                        <h6 class="fw-bold mb-3 text-primary">Backend (C#)</h6>
+                        <ul class="list-unstyled small">
+                            <li>? HomeController.cs</li>
+                            <li>? MedicamentoesController.cs</li>
+                            <li>? ClientesController.cs</li>
+                            <li>? DashboardViewModel.cs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="feature-card bg-light">
+                        <h6 class="fw-bold mb-3 text-success">Frontend (Views)</h6>
+                        <ul class="list-unstyled small">
+                            <li>? _Layout.cshtml</li>
+                            <li>? Home/Index.cshtml</li>
+                            <li>? Medicamentoes/Index.cshtml</li>
+                            <li>? Medicamentoes/Details.cshtml</li>
+                            <li>? Clientes/Index.cshtml</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="feature-card bg-light">
+                        <h6 class="fw-bold mb-3 text-warning">CSS Nuevo</h6>
+                        <ul class="list-unstyled small">
+                            <li>? site.css (rediseñado)</li>
+                            <li>? animations.css (nuevo)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="feature-card bg-light">
+                        <h6 class="fw-bold mb-3 text-info">JS Nuevo</h6>
+                        <ul class="list-unstyled small">
+                            <li>? custom.js (nuevo)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- Roles y Permisos -->
+        <section class="mb-5">
+            <h2 class="mb-4 fw-bold">
+                <i class="bi bi-shield-check text-primary me-2"></i>Roles y Permisos
+            </h2>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="feature-card" style="border-left: 4px solid #3b82f6;">
+                        <h5 class="fw-bold mb-3">?? Cliente</h5>
+                        <ul class="list-unstyled small">
+                            <li>? Ver inicio</li>
+                            <li>? Ver medicamentos</li>
+                            <li>? Buscar medicamentos</li>
+                            <li>? No gestiona stock</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="feature-card" style="border-left: 4px solid #10b981;">
+                        <h5 class="fw-bold mb-3">?? Farmacéutico</h5>
+                        <ul class="list-unstyled small">
+                            <li>? Ver medicamentos</li>
+                            <li>? <strong>CREAR medicamentos</strong> ?</li>
+                            <li>? Gestionar categorías</li>
+                            <li>? No editar/eliminar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="feature-card" style="border-left: 4px solid #f59e0b;">
+                        <h5 class="fw-bold mb-3">?? Administrador</h5>
+                        <ul class="list-unstyled small">
+                            <li>? Todo el sistema</li>
+                            <li>? Crear/editar/eliminar todo</li>
+                            <li>? Gestionar usuarios</li>
+                            <li>? Ver reportes completos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- Estadísticas -->
+        <section>
+            <h2 class="mb-4 fw-bold">
+                <i class="bi bi-bar-chart text-success me-2"></i>Estadísticas del Proyecto
+            </h2>
+
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <div class="feature-card">
+                        <h3 class="header-title">5</h3>
+                        <p class="mb-0">Archivos Backend Modificados</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="feature-card">
+                        <h3 class="header-title">5</h3>
+                        <p class="mb-0">Vistas Frontend Mejoras</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="feature-card">
+                        <h3 class="header-title">2</h3>
+                        <p class="mb-0">Archivos CSS/JS Nuevos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="text-center mt-5 pt-5 border-top">
+            <p class="text-muted mb-0">
+                <strong>Practica5Web3</strong> - Versión Mejorada 2026
+            </p>
+            <small class="text-muted">Con buscadores, permisos de farmacéutico y diseño moderno</small>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

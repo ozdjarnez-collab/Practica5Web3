@@ -18,9 +18,19 @@ namespace Practica5Web3.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            return View(await _context.Cliente.ToListAsync());
+            var query = _context.Cliente.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                query = query.Where(c => c.Nombre.ToLower().Contains(search) || 
+                                        c.Email.ToLower().Contains(search));
+            }
+
+            ViewBag.SearchTerm = search;
+            return View(await query.OrderBy(c => c.Nombre).ToListAsync());
         }
 
         // GET: Clientes/Details/5 - AQUÍ ESTÁ EL HISTORIAL

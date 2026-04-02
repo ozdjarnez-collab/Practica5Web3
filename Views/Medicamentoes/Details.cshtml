@@ -1,66 +1,220 @@
 ﻿@model Practica5Web3.Models.Medicamento
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Nombre;
+    var esVencido = DateTime.Now.Date > Model.FechaVencimiento;
+    var esPorVencer = DateTime.Now.Date.AddDays(30) >= Model.FechaVencimiento && !esVencido;
+    var stockBajo = Model.Stock <= 5;
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-between">
+                <h1 class="page-title mb-0">@Model.Nombre</h1>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Volver
+                </a>
+            </div>
+        </div>
+    </div>
 
-<div>
-    <h4>Medicamento</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaVencimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaVencimiento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estante)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estante.Nombre)
-        </dd>
-    </dl>
+    <div class="row g-4">
+        <!-- Tarjeta Principal -->
+        <div class="col-lg-8">
+            <div class="card panel-card border-0 rounded-4 shadow-lg h-100">
+                <div class="card-body p-4">
+                    <!-- Estados -->
+                    <div class="mb-4 d-flex gap-2">
+                        @if (esVencido)
+                        {
+                            <span class="badge bg-danger fs-6">
+                                <i class="bi bi-exclamation-triangle me-2"></i>Vencido
+                            </span>
+                        }
+                        else if (esPorVencer)
+                        {
+                            <span class="badge bg-warning fs-6">
+                                <i class="bi bi-clock-history me-2"></i>Por vencer pronto
+                            </span>
+                        }
+
+                        @if (stockBajo)
+                        {
+                            <span class="badge bg-info fs-6">
+                                <i class="bi bi-graph-down me-2"></i>Stock bajo
+                            </span>
+                        }
+
+                        @if (Model.Estado)
+                        {
+                            <span class="badge bg-success fs-6">
+                                <i class="bi bi-check-circle me-2"></i>Activo
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary fs-6">
+                                <i class="bi bi-circle me-2"></i>Inactivo
+                            </span>
+                        }
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Información Principal -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold">
+                                    <i class="bi bi-cash-coin text-success me-2"></i>Precio
+                                </label>
+                                <p class="fs-4 text-gradient fw-bold">Bs @Model.Precio.ToString("N2")</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold">
+                                    <i class="bi bi-boxes text-warning me-2"></i>Stock
+                                </label>
+                                <div class="d-flex align-items-center gap-3">
+                                    <p class="fs-4 fw-bold mb-0">@Model.Stock unidades</p>
+                                    <div class="progress flex-grow-1" style="height: 25px;">
+                                        @{
+                                            var percentage = Math.Min(100, (Model.Stock / 50) * 100);
+                                            var progressClass = stockBajo ? "bg-danger" : "bg-success";
+                                        }
+                                        <div class="progress-bar @progressClass" role="progressbar" style="width: @percentage%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold">
+                                    <i class="bi bi-calendar-event text-danger me-2"></i>Fecha de Vencimiento
+                                </label>
+                                <p class="fs-5">
+                                    @Model.FechaVencimiento.ToString("dd/MM/yyyy")
+                                    <br>
+                                    <small class="text-muted">
+                                        @if (esVencido)
+                                        {
+                                            <span class="text-danger">Vencido hace @((DateTime.Now.Date - Model.FechaVencimiento).Days) días</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Vence en @((Model.FechaVencimiento - DateTime.Now.Date).Days) días</span>
+                                        }
+                                    </small>
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold">
+                                    <i class="bi bi-tag text-info me-2"></i>Categoría
+                                </label>
+                                <p class="fs-5 fw-semibold">@Model.Categoria?.Nombre</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Ubicación -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-bold">
+                                <i class="bi bi-inbox text-primary me-2"></i>Estante
+                            </label>
+                            <p class="fs-5 fw-semibold">@Model.Estante?.Nombre</p>
+                        </div>
+                    </div>
+
+                    <!-- Descripción -->
+                    @if (!string.IsNullOrEmpty(Model.Descripcion))
+                    {
+                        <div class="mb-4">
+                            <label class="form-label text-muted fw-bold">
+                                <i class="bi bi-file-text me-2"></i>Descripción
+                            </label>
+                            <div class="p-3 bg-light rounded-3">
+                                <p class="mb-0">@Model.Descripcion</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Lateral -->
+        <div class="col-lg-4">
+            <!-- Card de Resumen -->
+            <div class="card metric-card bg-primary-gradient border-0 rounded-4 shadow-lg mb-4">
+                <div class="card-body text-white text-center">
+                    <div class="icon-box mx-auto mb-3">
+                        <i class="bi bi-capsule"></i>
+                    </div>
+                    <h6 class="card-title opacity-75">Estado del Medicamento</h6>
+                    <p class="mb-0 fs-5 fw-semibold">
+                        @if (Model.Estado)
+                        {
+                            <span>Disponible para venta</span>
+                        }
+                        else
+                        {
+                            <span>No disponible</span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <!-- Información de Auditoría (opcional) -->
+            <div class="card panel-card border-0 rounded-4 shadow-lg">
+                <div class="card-header bg-light rounded-top-4 border-0 p-3">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-info-circle me-2"></i>Información Adicional
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="text-muted small fw-bold">ID del Medicamento</label>
+                        <p class="mb-0 font-monospace text-muted">@Model.Id</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small fw-bold">Categoría ID</label>
+                        <p class="mb-0 font-monospace text-muted">@Model.CategoriaId</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small fw-bold">Estante ID</label>
+                        <p class="mb-0 font-monospace text-muted">@Model.EstanteId</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            @if (User.IsInRole("Administrador"))
+            {
+                <div class="mt-4 d-flex gap-2">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100">
+                        <i class="bi bi-pencil me-2"></i>Editar
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">
+                        <i class="bi bi-trash me-2"></i>Eliminar
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    .progress {
+        background-color: #e9ecef;
+        border-radius: 10px;
+    }
+
+    .font-monospace {
+        font-family: 'Courier New', monospace;
+    }
+</style>

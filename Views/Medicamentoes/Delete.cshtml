@@ -1,69 +1,90 @@
 ﻿@model Practica5Web3.Models.Medicamento
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Medicamento";
 }
 
-<h1>Delete</h1>
+<div class="container mt-4">
+    <a asp-action="Index" class="back-link">Volver a Medicamentos</a>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Medicamento</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaVencimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaVencimiento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estante)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estante.Nombre)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <div class="card delete-card">
+        <div class="card-header">
+            <h1>Eliminar Medicamento</h1>
+        </div>
+
+        <div class="card-body">
+            <div class="delete-warning">
+                <div class="delete-warning-icon">⚠️</div>
+                <div>
+                    ¿Estás seguro de que deseas eliminar este medicamento? Esta acción no se puede deshacer.
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3 style="color: #1f2937; margin-bottom: 1.5rem;">Información del Medicamento</h3>
+                
+                <div class="details-row">
+                    <div class="details-label">Nombre</div>
+                    <div class="details-value fw-semibold">@Html.DisplayFor(model => model.Nombre)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Precio</div>
+                    <div class="details-value">Bs @Html.DisplayFor(model => model.Precio)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Stock</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Stock) unidades</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Fecha de Vencimiento</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.FechaVencimiento, "{0:dd/MM/yyyy}")</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Categoría</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Categoria.Nombre)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Estante</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Estante.Nombre)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Descripción</div>
+                    <div class="details-value">@Html.DisplayFor(model => model.Descripcion)</div>
+                </div>
+
+                <div class="details-row">
+                    <div class="details-label">Estado</div>
+                    <div class="details-value">
+                        @if (Model.Estado)
+                        {
+                            <span class="badge bg-primary">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactivo</span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="delete-actions">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash3"></i> Confirmar Eliminación
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

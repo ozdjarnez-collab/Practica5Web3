@@ -25,39 +25,56 @@ namespace Practica5Web3.Controllers
             var hoy = DateTime.Now.Date;
             var limite30 = hoy.AddDays(30);
 
+            var medicamentosStockBajo = await _context.Medicamento
+                .Include(m => m.Categoria)
+                .Include(m => m.Estante)
+                .Where(m => m.Stock <= 5)
+                .OrderBy(m => m.Stock)
+                .ToListAsync();
+
+            var medicamentosPorVencer = await _context.Medicamento
+                .Include(m => m.Categoria)
+                .Include(m => m.Estante)
+                .Where(m => m.FechaVencimiento > hoy && m.FechaVencimiento <= limite30)
+                .OrderBy(m => m.FechaVencimiento)
+                .ToListAsync();
+
+            var medicamentosVencidos = await _context.Medicamento
+                .Include(m => m.Categoria)
+                .Include(m => m.Estante)
+                .Where(m => m.FechaVencimiento < hoy)
+                .OrderBy(m => m.FechaVencimiento)
+                .ToListAsync();
+
+            var medicamentosDisponibles = await _context.Medicamento
+                .Include(m => m.Categoria)
+                .Include(m => m.Estante)
+                .Where(m => m.Estado == true && m.Stock > 0)
+                .OrderBy(m => m.Nombre)
+                .ToListAsync();
+
+            var pedidosRecientes = await _context.Pedido
+                .Include(p => p.Cliente)
+                .OrderByDescending(p => p.Id)
+                .Take(5)
+                .ToListAsync();
+
             var dashboard = new DashboardViewModel
             {
                 TotalMedicamentos = await _context.Medicamento.CountAsync(),
                 TotalCategorias = await _context.Categoria.CountAsync(),
                 TotalEstantes = await _context.Estante.CountAsync(),
+                TotalClientes = await _context.Cliente.CountAsync(),
+                TotalPedidos = await _context.Pedido.CountAsync(),
+                TotalVentasEstimadas = await _context.Medicamento
+                    .Where(m => m.Stock > 0)
+                    .SumAsync(m => m.Precio * m.Stock),
 
-                StockBajo = await _context.Medicamento
-                    .Include(m => m.Categoria)
-                    .Include(m => m.Estante)
-                    .Where(m => m.Stock <= 5)
-                    .OrderBy(m => m.Stock)
-                    .ToListAsync(),
-
-                PorVencer = await _context.Medicamento
-                    .Include(m => m.Categoria)
-                    .Include(m => m.Estante)
-                    .Where(m => m.FechaVencimiento > hoy && m.FechaVencimiento <= limite30)
-                    .OrderBy(m => m.FechaVencimiento)
-                    .ToListAsync(),
-
-                Vencidos = await _context.Medicamento
-                    .Include(m => m.Categoria)
-                    .Include(m => m.Estante)
-                    .Where(m => m.FechaVencimiento < hoy)
-                    .OrderBy(m => m.FechaVencimiento)
-                    .ToListAsync(),
-
-                Disponibles = await _context.Medicamento
-                    .Include(m => m.Categoria)
-                    .Include(m => m.Estante)
-                    .Where(m => m.Estado == true && m.Stock > 0)
-                    .OrderBy(m => m.Nombre)
-                    .ToListAsync()
+                StockBajo = medicamentosStockBajo,
+                PorVencer = medicamentosPorVencer,
+                Vencidos = medicamentosVencidos,
+                Disponibles = medicamentosDisponibles,
+                PedidosRecientes = pedidosRecientes
             };
 
             return View(dashboard);
